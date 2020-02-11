@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Home from "./pages/Home/Home";
-import Signup from "./pages/signup/Signup";
+import Signup from "./pages/Signup/signup";
 import ChatComponent from "./chat/chat";
 
 const App = () => {

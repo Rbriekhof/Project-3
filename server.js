@@ -18,7 +18,7 @@ if (process.env.NODE_ENV === "production") {
 app.use(routes);
 
 
-mongoose.connect(process.env.MONGODB_URI || "", { useNewUrlParser: true });
+mongoose.connect(process.env.MONGODB_URI || "mongodb://biswas:testing123@ds117145.mlab.com:17145/heroku_z8mn8k1z", { useNewUrlParser: true });
 
 
 app.listen(PORT, () => {
