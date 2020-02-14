@@ -1,4 +1,4 @@
-const router = require("express").Router();
+/* const router = require("express").Router();
 const userController = require("../../controllers/userController");
 const passport = require("passport");
 const { Strategy: JwtStrategy, ExtractJwt } = require("passport-jwt");
@@ -37,5 +37,15 @@ router
     .put(passport.authenticate("jwt", { session: false }), userController.update)
     .delete(passport.authenticate("jwt", { session: false }), userController.remove);
 
+
+module.exports = router; */
+
+const express = require('express');
+const router = express.Router();
+
+/* GET users listing. */
+router.get('/', (req, res, next) => {
+  res.send('respond with a resource');
+});
 
 module.exports = router;
