@@ -4,7 +4,7 @@ import Home from "./pages/Home/Home";
 import Signup from "./pages/Signup/signup";
 import ChatComponent from "./chat/chat";
 import JobCreation from "./job/Jobpost";
-import JobPosting from "./pages/PostJob/postjob";
+import JobPosting from "./pages/SaveJob";
 
 const App = () => {
   return(
