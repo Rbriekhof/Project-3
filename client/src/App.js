@@ -4,6 +4,7 @@ import Home from "./pages/Home/Home";
 import Signup from "./pages/Signup/signup";
 import ChatComponent from "./chat/chat";
 import JobCreation from "./job/Jobpost";
+import JobPosting from "./pages/PostJob/postjob";
 
 const App = () => {
   return(
@@ -14,6 +15,7 @@ const App = () => {
           <Route exact path="/signup" component={Signup} />
           <Route path="/chat" component={ChatComponent} />
           <Route path="/jobcreation" component={JobCreation} />
+          <Route path="/jobpost" component={JobPosting} />
           
         </Switch>
       </div>
