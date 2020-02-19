@@ -1,28 +1,44 @@
 import React from "react";
 
-// Exporting the Container, Row, and Col components from this file
-
-// This Container component allows us to use a bootstrap container without worrying about class names
-export function Container({ fluid, children }) {
-  return <div className={`container${fluid ? "-fluid" : ""}`}>{children}</div>;
-}
-
-// This Row component lets us use a bootstrap row without having to think about class names
-export function Row({ fluid, children }) {
-  return <div className={`row${fluid ? "-fluid" : ""}`}>{children}</div>;
-}
-
-// This Col component lets us size bootstrap columns with less syntax
-// e.g. <Col size="md-12"> instead of <div className="col-md-12">
-export function Col({ size, children }) {
+export default ({ handleChange, handleSubmit, postedDetails }) => {
   return (
-    <div
-      className={size
-        .split(" ")
-        .map(size => "col-" + size)
-        .join(" ")}
-    >
-      {children}
+    <div className="col-md-6">
+    <h3> Job Creation Form </h3>
+      <form className="container-fluid">
+        <div className="form-group">
+          <input
+            className="col-12 form-control"
+            name="jobTitle"
+            onChange={handleChange}
+            type="text"
+            value={postedDetails.jobTitle}
+            placeholder="Job title"
+          />
+        </div>
+        <div className="form-group">
+          <textarea
+            className="col-12 form-control"
+            name="jobDescription"
+            onChange={handleChange}
+            type="text"
+            value={postedDetails.jobDescription}
+            placeholder="Job description"
+          />
+        </div>
+        <div className="form-group">
+          <input
+            className="col-12 form-control"
+            name="jobPrice"
+            onChange={handleChange}
+            type="number"
+            value={postedDetails.jobPrice}
+            placeholder="Job price"
+          />
+        </div>
+        <button className="btn btn-primary" onClick={handleSubmit}>
+          Submit job details
+        </button>
+      </form>
     </div>
   );
-}
+};
