@@ -5,3 +5,5 @@
 /seeders
 /models
 /controllers
+/routes
+/config

@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-
+const passportLocalMongoose = require('passport-local-mongoose');
 const { Schema } = mongoose;
 const bcrypt = require("bcrypt-nodejs");
 
@@ -45,7 +45,7 @@ const userSchema = new Schema({
         match: [/\d{3}-\d{3}-\d{4}/, "Please enter a 10-digit phone number of the format xxx-xxx-xxxx"],
     },
 });
-
+/* 
 userSchema.pre("save", function (next) {
     if (this.isModified("password") || this.isNew) {
         bcrypt.genSalt(10, (err, salt) => {
@@ -67,6 +67,7 @@ userSchema.methods.comparePassword = function (pass, cb) {
         if (err) { return cb(err); }
         cb(null, isMatch);
     });
-};
+}; */
+userSchema.plugin(passportLocalMongoose);
 const User = mongoose.model("User", userSchema);
 module.exports = User;

@@ -82,7 +82,7 @@ class FormContainer extends Component {
 API.postJob(jobData)
 .then(
     
-    this.setState({ message: alert("Your job is posted") })
+    this.setState({ message: "Your job is posted" })
 )
 .catch(err => console.log(err))
   }
