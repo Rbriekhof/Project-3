@@ -64,6 +64,10 @@ const API = {
   },
 
 
+  postJob: function (postedJobs) {
+    return axios.post("/api/jobs", postedJobs);
+},
+
   // Saves a user to the database
   saveUser(userData) {
     return axios.post("/api/user", userData);
@@ -101,14 +105,16 @@ const API = {
   },
 
   getTasks() {
-    let JWToken = this.getJWT();
-
-    return axios.get("/api/tasklist",
+    console.log("get tasks entry")
+    //let JWToken = this.getJWT();
+    //console.log(JWToken)
+    return axios.get("/api/tasklist"
+    /*,
       {
         headers: {
           Authorization: `Bearer ${JWToken}`
         }
-      }
+      }*/
     ).catch(err => {
       if (err.response.status === 401) {
         console.log("Unauthorized");
