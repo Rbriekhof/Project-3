@@ -1,0 +1,93 @@
+html body .bg {
+    position: relative;
+    height: 100%;
+}
+.bg  { 
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 95%; 
+    margin: 0px;
+    padding: 0px;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    /* Center and scale the image nicely */
+}
+#slogan {
+    font-family: 'Indie Flower', cursive;
+}
+.pageTitle {
+    font-family: 'Indie Flower', cursive;
+    font-size: 24px;
+}
+body > #root > div {
+    height: 100vh;
+}
+.homeForm {
+      position: absolute;
+      bottom: 10px;
+      left: 0px;
+      right: 0px;
+      border-radius: 25px;
+}
+.signupForm {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    border-radius: 25px;
+    max-height: 80%;
+    overflow: auto
+}
+.userForm {
+    /* border-radius: 15px; */
+    overflow: auto;
+}
+.profile {
+    /* border-radius: 15px; */
+    height: 85%;
+    overflow: auto
+}
+.userLists {
+    height: 400px;
+    overflow: auto;
+    margin-right: 10px;
+    margin-bottom: 4px;
+    padding: 0px!important;
+}
+.runner {
+    /* border-radius: 15px; */
+    height: 85%;
+    overflow: auto
+}
+.blur {
+    background-color: aliceblue;
+    opacity: .85
+}
+.radius {
+    border-radius: 15px;
+    margin-bottom: 10px;
+}
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+}
+/* Track */
+::-webkit-scrollbar-track {
+    background: transparent
+}
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: rgb(16, 204, 195); 
+}
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #888
+}
+textarea.materialize-textarea{
+    height: 6rem;
+}
