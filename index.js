@@ -1,44 +1,28 @@
 import React from "react";
 
-export default ({ handleChange, handleSubmit, postedDetails }) => {
-  return (
-    <div className="col-md-6">
-    <h3> Job Creation Form </h3>
-      <form className="container-fluid">
-        <div className="form-group">
-          <input
-            className="col-12 form-control"
-            name="jobTitle"
-            onChange={handleChange}
-            type="text"
-            value={postedDetails.jobTitle}
-            placeholder="Job title"
-          />
-        </div>
-        <div className="form-group">
-          <textarea
-            className="col-12 form-control"
-            name="jobDescription"
-            onChange={handleChange}
-            type="text"
-            value={postedDetails.jobDescription}
-            placeholder="Job description"
-          />
-        </div>
-        <div className="form-group">
-          <input
-            className="col-12 form-control"
-            name="jobPrice"
-            onChange={handleChange}
-            type="number"
-            value={postedDetails.jobPrice}
-            placeholder="Job price"
-          />
-        </div>
-        <button className="btn btn-primary" onClick={handleSubmit}>
-          Submit job details
-        </button>
-      </form>
+function Nav() {
+    return (
+        <nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+      <a class="navbar-brand" href="#myPage">Task Grab</a>
     </div>
-  );
-};
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="/jobpost">Create Jobs</a></li>
+        <li><a href="/jobs">Saved Jobs</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+        
+    );
+}
+
+export default Nav;
