@@ -15,7 +15,6 @@
       "internalConsoleOptions": "neverOpen",
       "env": {
         "NODE_ENV": "development",
-        "JWT_SECRET": "p1i2c3k4l5e6s7"
       }
     },
   ]
