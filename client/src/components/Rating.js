@@ -1,70 +1,41 @@
-import React from "react";
+import React from 'react';
+import StarRatingComponent from 'react-star-rating-component';
+
+// import cx from 'classnames';
 
 
 
-var App = React.createClass({
-    render() {
-        <div>
-            <Rating />
-        </div>
-    }
-})
 
-var Rating = React.createClass({
-    propTypes: {
-        disabled: React.PropTypes.bool
-    },
-    getInitialState() {
-        return {
-            rating: this.props.rating || null,
-            temp_rating: null
+class StarRating extends React.Component {
+
+    constructor() {
+        super();
+    
+        this.state = {
+          rating: 1
         };
-    },
-    rate(rating) {
-        this.setState({
-            rating: rating,
-            temp_rating: rating
-        });
-    },
-    star_over(rating) {
-        this.state.temp_rating = this.state.rating;
-        this.state.rating = rating;
-        this.setState({
-            rating: this.state.rating,
-            temp_rating: this.state.temp_rating
-        });
-    },
-    star_out() {
-        this.state.rating = this.state.temp_rating;
-
-        this.setState({ rating: this.state.rating });
-    },
-    render() {
-        var stars = [];
-
-        for(var i = 0; i < 5; i++) {
-            var klass = 'star-rating__star';
-
-            if (this.state.rating >= i && this.state.rating != null) {
-                klass += ' is-selected';
-            }
-
-            stars.push(
-                <label
-                    className={klass}
-                    onClick={this.rate.bind(this, i)}
-                    onMouseOver={this.star_over.bind(this, i)}
-                    onMouseOut={this.star_out}>
-                    ★ 
-                    </label>
-            );
-        }
-        return (
-            <div className="star-rating">
-                {stars}
-            </div>
-        )
+      }
+    
+      onStarClick(nextValue, prevValue, name) {
+        this.setState({rating: nextValue});
+      }
+    
+      render() {
+        const { rating } = this.state;
+        
+        return (                
+          <div>
+            <h2>You gave {rating} stars!</h2>
+            <StarRatingComponent
+              name="rate1" 
+              starCount={5}
+              value={rating}
+              onStarClick={this.onStarClick.bind(this)}
+            />
+          </div>
+        );
+      }
     }
-});
+    
 
-React.render(<App />, document.querySelector('#app'));
+export default StarRating;
