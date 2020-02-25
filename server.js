@@ -1,4 +1,4 @@
-const express = require("express");
+
 /* const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
@@ -43,9 +43,15 @@ const mongoose = require("mongoose");
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
 const flash = require("connect-flash");
+const Chatkit = require('@pusher/chatkit-server')
 
 const routes = require("./routes/index");
 const users = require("./routes/api/user");
+
+const chatkit = new Chatkit.default({
+    instanceLocator: 'v1:us1:ac606406-27fc-49c5-ba04-452cc26264eb',
+    key: '12d3e1fb-c7fb-4dbf-bf90-b095b552a46c:95yHb/PCPpYmyMpmcz3AUV99ROifmeWcJftsG77TCjM=',
+  })
 
 const app = express();
 
@@ -72,6 +78,28 @@ app.use(express.static(path.join(__dirname, "public")));
 
 
 app.use("/", routes);
+
+app.post('/users', (req, res) => {
+    const { username } = req.body
+    chatkit
+      .createUser({
+        id: username,
+        name: username
+      })
+      .then(() => res.sendStatus(201))
+      .catch(error => {
+        if (error.error === 'services/chatkit/user_already_exists') {
+          res.sendStatus(200)
+        } else {
+          res.status(error.status).json(error)
+        }
+      })
+  })
+  
+  app.post('/authenticate', (req, res) => {
+    const authData = chatkit.authenticate({ userId: req.query.user_id })
+    res.status(authData.status).send(authData.body)
+  })
 
 // passport config
 const userSchema = require("./models/user");
