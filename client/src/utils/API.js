@@ -104,17 +104,19 @@ const API = {
     });
   },
 
+
+  //get a list of all jobs
   getTasks() {
     console.log("get tasks entry")
-    //let JWToken = this.getJWT();
-    //console.log(JWToken)
-    return axios.get("/api/tasklist"
-    /*,
+    let JWToken = this.getJWT();
+    console.log(JWToken)
+    return axios.get("/api/v1/tasklist"
+    ,
       {
         headers: {
           Authorization: `Bearer ${JWToken}`
         }
-      }*/
+      }
     ).catch(err => {
       if (err.response.status === 401) {
         console.log("Unauthorized");
@@ -123,6 +125,8 @@ const API = {
       return Promise.reject(err);
     });
   },
+
+
   // Gets the taskList with the given id
   getTask(id) {
     let JWToken = this.getJWT();
@@ -160,11 +164,13 @@ const API = {
       return Promise.reject(err);
     });
   },
+
+
   // Saves a taskList to the database
   saveTask(taskListData) {
     let JWToken = this.getJWT();
 
-    return axios.post("/api/tasklist", taskListData,
+    return axios.post("/api/v1/tasklist", taskListData,
       {
         headers: {
           Authorization: `Bearer ${JWToken}`
@@ -191,28 +197,26 @@ const API = {
   },
 
 
-  // BEGIN MY CODE FOR UPDATING (added comma above also)
-  // Updates a taskList in the database
+  
+  // Updates a job details in the database
   updateTask(taskListDataNew) {
     let JWToken = this.getJWT();
-
     let id = taskListDataNew._id;
 
-  
-  return axios.put("/api/tasklist/" + id, taskListDataNew,
-    {
-      headers: {
-        Authorization: `Bearer ${JWToken}`
+    return axios.put("/api/tasklist/" + id, taskListDataNew,
+      {
+        headers: {
+          Authorization: `Bearer ${JWToken}`
+        }
       }
-    }
-  ).catch(err => {
-    if (err.response.status === 401) {
-      console.log("Unauthorized");
-      this.logout();
-    }
-    return Promise.reject(err);
-  });
-},
+    ).catch(err => {
+      if (err.response.status === 401) {
+        console.log("Unauthorized");
+        this.logout();
+      }
+      return Promise.reject(err);
+    });
+  },
 
 
   // END MY CODE FOR UPDATING
