@@ -1,11 +1,11 @@
 import React, { Component } from "react";
-
 /* Import Components */
 import CheckBox from "../components/CheckBox";
 import Input from "../components/Input";
 import TextArea from "../components/TextArea";
 import Select from "../components/Select";
 import Button from "../components/Button";
+import API from "../utils/API";
 
 class FormContainer extends Component {
   constructor(props) {
@@ -60,8 +60,10 @@ class FormContainer extends Component {
   handleFormSubmit(e) {
     e.preventDefault();
     let jobData = this.state.newJob;
-    console.log("desc:");
+
     console.log(jobData);
+    console.log("desc:");
+    console.log();
     alert("You are submitting : \n" + this.state.newJob.jobTitle +"\n"+ this.state.newJob.jobDescription);
     {/*
     fetch("#", {
@@ -77,6 +79,12 @@ class FormContainer extends Component {
       });
     });
 */}
+API.postJob(jobData)
+.then(
+    
+    this.setState({ message: alert("Your job is posted") })
+)
+.catch(err => console.log(err))
   }
 
   handleClearForm(e) {

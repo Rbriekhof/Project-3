@@ -3,3 +3,10 @@
 /tests
 /migrations
 /seeders
+/models
+/controllers
+/routes
+/config
+/server.js
+/API.js
+/database

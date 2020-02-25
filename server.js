@@ -1,27 +1,44 @@
-const express = require("express");
-const mongoose = require("mongoose");
-const routes = require("./routes");
-const bodyParser = require("body-parser");
+const express = require('express')
+const bodyParser = require('body-parser')
+const morgan = require('morgan')
+const session = require('express-session')
+const dbConnection = require('./database')
+const MongoStore = require('connect-mongo')(session)
+const passport = require('./config/passport');
+const app = express()
+const PORT = process.env.PORT || 3001
+// Route requires
+const user = require('./routes/user')
 
-const PORT = process.env.PORT || 3001;
-const app = express();
-
-// Define middleware here
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
-
-// Serve up static assets (usually on heroku)
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static("client/build"));
-}
-
-// Define API routes here
-app.use(routes);
-
-// Connet to mongoose
-mongoose.connect(process.env.MONGODB_URI || "mongodb://biswas:testing123@ds117145.mlab.com:17145/heroku_z8mn8k1z");
+app.use(bodyParser.json())
+// MIDDLEWARE
+app.use(morgan('dev'))
+app.use(
+	bodyParser.urlencoded({
+		extended: false
+	})
+)
 
 
+// Sessions
+app.use(
+	session({
+		secret: 'fraggle-rock', //pick a random string to make the hash that is generated secure
+		store: new MongoStore({ mongooseConnection: dbConnection }),
+		resave: false, //required
+		saveUninitialized: false //required
+	})
+)
+
+// Passport
+app.use(passport.initialize())
+app.use(passport.session()) // calls the deserializeUser
+
+
+// Routes
+app.use('/user', user)
+
+// Starting Server 
 app.listen(PORT, () => {
-  console.log (' 🌎==> API server now on port ${PORT}!`);
-});
+	console.log(`>>> App listening on PORT: ${PORT}`)
+})
