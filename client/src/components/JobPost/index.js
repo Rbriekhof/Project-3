@@ -1,6 +1,6 @@
 import React from "react";
 
-const JobPost = ({ handleChange, handleJPostButton, jobdetails }) => {
+const JobPost = ({ handleChange, handleSubmit, postedDetails }) => {
     return (
             <form>
                 <div className="form-group">
@@ -9,7 +9,7 @@ const JobPost = ({ handleChange, handleJPostButton, jobdetails }) => {
                     name="jobTitle"
                     onChange={handleChange}
                     type="text"
-                    value={jobdetails.jobTitle}
+                    value={postedDetails.jobTitle}
                     placeholder="Job title"
                     />
                 </div>
@@ -19,7 +19,7 @@ const JobPost = ({ handleChange, handleJPostButton, jobdetails }) => {
                     name="jobDescription"
                     onChange={handleChange}
                     type="text"
-                    value={jobdetails.jobDescription}
+                    value={postedDetails.jobDescription}
                     placeholder="Job description"
                 />
                 </div>
@@ -29,7 +29,7 @@ const JobPost = ({ handleChange, handleJPostButton, jobdetails }) => {
                     name="jobPrice"
                     onChange={handleChange}
                     type="number"
-                    value={jobdetails.jobPrice}
+                    value={postedDetails.jobPrice}
                     placeholder="post price"
                 />
                 </div>
@@ -39,14 +39,14 @@ const JobPost = ({ handleChange, handleJPostButton, jobdetails }) => {
                     className="form-control"
                     onChange={handleChange}
                     name="ctg"
-                    value={jobdetails.ctg}
+                    value={postedDetails.ctg}
                 >
                     <option>Moduler</option>
                     <option>Non-moduler</option>
                 </select>
                 </div>
                 */}
-                <button className="btn btn-primary" onClick={handleJPostButton}>
+                <button className="btn btn-primary" onClick={handleSubmit}>
                     Post Job
                 </button>
             </form>

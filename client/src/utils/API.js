@@ -172,7 +172,7 @@ const API = {
 
     return axios.post("/api/v1/tasklist", taskListData,
       {
-        headers: {
+        headers: { 
           Authorization: `Bearer ${JWToken}`
         }
       }

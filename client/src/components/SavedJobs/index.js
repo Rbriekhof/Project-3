@@ -35,7 +35,7 @@ import posts from '../LocalPosts/posts';
             <div className="card">
                 <div className="card-body player">
                     <div className="article">
-                        <h3>Jobs that You Created</h3>
+                        <h3>Created Jobs</h3>
                         {console.log("got result")}
                         {props.savedJobs.map(savedjob => {
                             return (savedjob.jobStatus==="accepted")?
@@ -43,7 +43,7 @@ import posts from '../LocalPosts/posts';
                                  <div class="col-lg-12 bottom-pad">
                                             <div class="row no-gutters">
                                         <Row className="SearchResult row" id={savedjob.jobTitle + "Card"} key={savedjob._id}>
-                                            
+                                             
                                             <div class="col-md-1">
                                             </div>
                                             <div class="col-md-11">

@@ -9,6 +9,7 @@ const app = express()
 const PORT = process.env.PORT || 3001
 // Route requires
 const user = require('./routes/user')
+const tasklist = require ('./routes/api/tasklist')
 
 app.use(bodyParser.json())
 // MIDDLEWARE
@@ -37,6 +38,7 @@ app.use(passport.session()) // calls the deserializeUser
 
 // Routes
 app.use('/user', user)
+app.use('/jobpost', tasklist)
 
 // Starting Server 
 app.listen(PORT, () => {
