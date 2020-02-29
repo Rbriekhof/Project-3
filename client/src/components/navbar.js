@@ -25,6 +25,10 @@ class Navbar extends Component {
         }).catch(error => {
             console.log('Logout error')
         })
+/*        Redirect Work
+             this.setState({
+            redirectTo: '/'
+        }) */
     }
 
     render() {
