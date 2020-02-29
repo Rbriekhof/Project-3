@@ -9,18 +9,24 @@ import JobCreation from "./job/Jobpost";
 import JobPosting from "./pages/SaveJob";
 import JobList from "./pages/SavedJobs";
 import Navbar from "./components/navbar";
+import UsernameForm from './components/UsernameForm'
+import ChatScreen from './ChatScreen'
 
 class App extends Component {
   constructor() {
     super()
     this.state = {
       loggedIn: false,
-      username: null
+      username: null,
+      currentUsername: '',
+      currentScreen: 'WhatIsYourUsernameScreen'
     }
 
     this.getUser = this.getUser.bind(this)
     this.componentDidMount = this.componentDidMount.bind(this)
     this.updateUser = this.updateUser.bind(this)
+    this.onUsernameSubmitted = this.onUsernameSubmitted.bind(this)
+
   }
 
   componentDidMount() {
@@ -52,7 +58,32 @@ class App extends Component {
     })
   }
 
+  onUsernameSubmitted(username) {
+    fetch('http://localhost:3001/users', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ username }),
+    })
+      .then(response => {
+        this.setState({
+          currentUsername: username,
+          currentScreen: 'ChatScreen'
+        })
+      })
+      .catch(error => console.error('error', error))
+  }
+
   render() {
+
+    if (this.state.currentScreen === 'WhatIsYourUsernameScreen') {
+      return <UsernameForm onSubmit={this.onUsernameSubmitted} />
+    }
+    if (this.state.currentScreen === 'ChatScreen') {
+      return <ChatScreen currentUsername={this.state.currentUsername} />
+    }
+
     return (
       <div className="App">
 
@@ -80,6 +111,7 @@ class App extends Component {
         <Route path="/jobcreation" component={JobCreation} />
         <Route path="/jobpost" component={JobPosting} />
         <Route path="/jobs" component={JobList} />
+        <Route path="/chat" component={ChatScreen} />
       </div>
     );
   }
