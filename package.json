@@ -7,28 +7,22 @@
   "main": "server.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/TBD"
+    "url": "git+https://github.com/Rbriekhof/Task-Grab"
   },
   "homepage": "TBD",
   "scripts": {
-    "start": "if-env NODE_ENV=production && yarn start:prod || yarn start:dev",
+    "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
     "start:prod": "node server.js",
-    "start:dev": "yarn kill && concurrently \"nodemon\" \"yarn client\"",
-    "server": "yarn kill && nodemon",
-    "client": "cd client && yarn start",
-    "install": "cd client && yarn install",
-    "build": "cd client && yarn build",
-    "heroku-postbuild": "yarn build",
-    "kill": "kill-port 3001",
-    "lint": "eslint --quiet .",
-    "lint:fix": "eslint --fix .",
-    "tests": "yarn kill && NODE_ENV=test nyc --reporter=html --reporter=text mocha tests/**/*.spec.js --exit",
-    "test:coverage": "nyc report --reporter=text-lcov | coveralls"
+    "start:dev": "concurrently \"nodemon --ignore 'client/*'\" \"npm run client\"",
+    "client": "cd client && npm run start",
+    "install": "cd client && npm install",
+    "build": "cd client && npm run build",
+    "heroku-postbuild": "npm run build"
   },
   "nodemonConfig": {
     "events": {
-      "restart": "yarn kill",
-      "crash": "yarn kill"
+      "restart": "npm kill",
+      "crash": "npm kill"
     },
     "delay": "3000",
     "ignore": [
@@ -57,16 +51,33 @@
     "supertest": "^4.0.2"
   },
   "dependencies": {
+    "@material-ui/core": "^4.9.1",
+    "@material-ui/icons": "^4.9.1",
     "axios": "^0.19.2",
+    "bcrypt-nodejs": "0.0.3",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
+    "connect-flash": "^0.1.1",
+    "connect-mongo": "^3.2.0",
+    "cookie-parser": "^1.4.4",
     "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "express-session": "^1.17.0",
+    "firebase": "^6.0.2",
     "helmet": "^3.21.2",
     "if-env": "^1.0.4",
+    "mongoose": "^5.8.11",
+    "morgan": "^1.9.1",
     "mysql2": "^2.1.0",
     "passport": "^0.4.1",
+    "passport-jwt": "^4.0.0",
     "passport-local": "^1.0.0",
+    "passport-local-mongoose": "^6.0.1",
     "passport-session": "^1.0.2",
-    "sequelize": "^4.44.3"
+    "react-router-dom": "^5.1.2",
+    "sequelize": "^4.44.3",
+    "serve-favicon": "^2.5.0",
+    "spectre.css": "^0.5.8"
   }
 }

@@ -1,54 +1,48 @@
-const path = require('path');
-const express = require('express');
-const helmet = require('helmet');
-const cors = require('cors');
-const session = require('express-session');
-
-const db = require('./models');
-const routes = require('./routes');
+const express = require('express')
+const bodyParser = require('body-parser')
+const morgan = require('morgan')
+const session = require('express-session')
+const dbConnection = require('./database')
+const MongoStore = require('connect-mongo')(session)
 const passport = require('./config/passport');
-const corsOptions = require('./config/cors.js');
+const app = express()
+const PORT = process.env.PORT || 3001
+// Route requires
+// const user = require('./routes/user')
+const routes = require('./routes')
+// const tasklist = require ('./routes/api/tasklist')
 
-const PORT = process.env.PORT || 3001;
-const app = express();
+app.use(bodyParser.json())
+// MIDDLEWARE
+app.use(morgan('dev'))
+app.use(
+	bodyParser.urlencoded({
+		extended: false
+	})
+)
 
-// Define middleware here
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
-app.use(helmet());
-app.use(session({ secret: 'TBD', resave: true, saveUninitialized: true }));
-app.use(passport.initialize());
-app.use(passport.session());
-app.use(cors(corsOptions));
 
-// Serve up static assets (usually on heroku)
-if (process.env.NODE_ENV === 'production') {
-  app.use(express.static('client/build'));
-}
+// Sessions
+app.use(
+	session({
+		secret: 'fraggle-rock', //pick a random string to make the hash that is generated secure
+		store: new MongoStore({ mongooseConnection: dbConnection }),
+		resave: false, //required
+		saveUninitialized: false //required
+	})
+)
 
-// Add routes, both API and view
-app.use(routes);
+// Passport
+app.use(passport.initialize())
+app.use(passport.session()) // calls the deserializeUser
 
-// The "catchall" handler: for any request that doesn't
-// match one above, send back React's index.html file.
-// Serve up static assets (usually on heroku)
-if (process.env.NODE_ENV === 'production') {
-  app.get('*', (_, res) => {
-    res.sendFile(path.join(__dirname, '/client/build/index.html'));
-  });
-}
 
-// Dynamically force schema refresh only for 'test'
-const FORCE_SCHEMA = process.env.NODE_ENV === 'test';
+// Routes
+app.use(routes)
+// app.use('/user', user)
+// app.use('/jobpost', tasklist)
 
-db.sequelize
-  .authenticate()
-  .then(() => {
-    db.sequelize.sync({ force: FORCE_SCHEMA }).then(() => {
-      console.log(`🌎 ==> API server now on port ${PORT}!`); // eslint-disable-line no-console
-      app.emit('appStarted');
-    });
-  })
-  .catch(console.error); // eslint-disable-line no-console
-
-module.exports = app;
+// Starting Server 
+app.listen(PORT, () => {
+	console.log(`>>> App listening on PORT: ${PORT}`)
+})
