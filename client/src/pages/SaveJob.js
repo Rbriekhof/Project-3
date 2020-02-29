@@ -14,7 +14,7 @@ class SaveJob extends Component {
             jobDescription: "",
             jobPrice: 3000,
             jobStatus:null,
-            jobPoster: "Administrator"
+            jobPoster: localStorage.getItem('LoggedInUser')
           },
           jobs: []
         };

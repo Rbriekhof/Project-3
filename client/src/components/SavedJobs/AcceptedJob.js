@@ -22,7 +22,7 @@ const AcceptedJob = ({ savedjob, ...props }) => {
                         </Row>
                     </div>
                     <br />
-                    <button className="confirmJob  btn btn-success" style={{ "marginLeft": "-15px" }} onClick={(e) => props.handleStatusUpdateClick(savedjob._id, 'confirmed')}>
+                    <button className="confirmJob  btn btn-success" style={{ "marginLeft": "18px" }} onClick={(e) => props.handleStatusUpdateClick(savedjob._id, 'confirmed')}>
                         Confirm
                     </button>
                     {" "}
