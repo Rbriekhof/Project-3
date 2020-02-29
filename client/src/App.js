@@ -19,7 +19,7 @@ class App extends Component {
       loggedIn: false,
       username: null,
       currentUsername: '',
-      currentScreen: 'WhatIsYourUsernameScreen'
+      currentView: 'WhatIsYourUsernameScreen'
     }
 
     this.getUser = this.getUser.bind(this)
@@ -69,20 +69,37 @@ class App extends Component {
       .then(response => {
         this.setState({
           currentUsername: username,
-          currentScreen: 'ChatScreen'
+          currentView: 'ChatScreen'
         })
       })
       .catch(error => console.error('error', error))
   }
 
+  testReturnComponent() {
+    if (this.state.currentView === "WhatIsYourUsernameScreen") {
+      return <UsernameForm onSubmit={this.onUsernameSubmitted} changeView={this.changeView} />
+    } if (this.state.currentView === "ChatScreen") {
+      return <ChatScreen onSubmit={this.createUser} currentUsername={this.state.currentUsername} />
+    }
+  }
+
   render() {
 
-    if (this.state.currentScreen === 'WhatIsYourUsernameScreen') {
-      return <UsernameForm onSubmit={this.onUsernameSubmitted} />
+    // if (this.state.currentScreen === 'WhatIsYourUsernameScreen') {
+    //   return <UsernameForm onSubmit={this.onUsernameSubmitted} />
+    // }
+    // if (this.state.currentScreen === 'ChatScreen') {
+    //   return <ChatScreen currentUsername={this.state.currentUsername} />
+    // }
+    let view = "";
+
+    if (this.state.currentView === "WhatIsYourUsernameScreen") {
+      view = <UsernameForm changeView={this.changeView} />
+    } if (this.state.currentView === "ChatScreen") {
+      view = <ChatScreen onSubmit={this.createUser} />
     }
-    if (this.state.currentScreen === 'ChatScreen') {
-      return <ChatScreen currentUsername={this.state.currentUsername} />
-    }
+
+
 
     return (
       <div className="App">
@@ -108,10 +125,27 @@ class App extends Component {
           render={() =>
             <Signup />}
         />
+
+        {/* <Route
+          path="/chat"
+          render={() =>
+            <UsernameForm />}
+        /> */}
+        <Route
+          path="/chat"
+          render={() => this.testReturnComponent()}
+        />
+
+        {/* <Route
+          path="/chat"
+          render={() =>
+            <ChatScreen currentUsername={this.state.currentUsername}/>}
+        /> */}
+
         <Route path="/jobcreation" component={JobCreation} />
         <Route path="/jobpost" component={JobPosting} />
         <Route path="/jobs" component={JobList} />
-        <Route path="/chat" component={ChatScreen} />
+
       </div>
     );
   }
