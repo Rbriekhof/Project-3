@@ -12,7 +12,6 @@ class Home extends Component {
         }
         return (
             <div>
-                <p>It's good to be home</p>
                 
             </div>
         )
