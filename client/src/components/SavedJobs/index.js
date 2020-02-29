@@ -53,11 +53,22 @@ const SavedJobs = props => {
                                                     </div>
                                                     <br />
 
-                                                    
-                                                    <button className="btn btn-primary" style={{ "marginLeft": "18px" }} onClick={() => props.handleStatusUpdateClick(savedjob._id, 'accepted')}>
-                                                        Accept Job
-                                                    </button>
-                                                    
+                                                    {
+                                                        localStorage.getItem('LoggedInUser')===savedjob.jobPoster?
+                                                            (
+                                                                <button className="btn btn-danger" style={{ "marginLeft": "18px" }} onClick={() => props.handleDeleteTaskClick(savedjob._id)}>
+                                                                    Delete Job
+                                                                </button>                                                                
+                                                            )
+                                                            :
+                                                            (
+                                                                <button className="btn btn-primary" style={{ "marginLeft": "18px" }} onClick={() => props.handleStatusUpdateClick(savedjob._id, 'accepted')}>
+                                                                    Accept Job
+                                                                </button>
+                                                            )
+
+                                                    }
+                                                                
                                                 </div>
 
                                             </Row>
