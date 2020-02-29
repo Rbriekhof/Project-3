@@ -9,18 +9,24 @@ import JobCreation from "./job/Jobpost";
 import JobPosting from "./pages/SaveJob";
 import JobList from "./pages/SavedJobs";
 import Navbar from "./components/navbar";
+import UsernameForm from './components/UsernameForm'
+import ChatScreen from './ChatScreen'
 
 class App extends Component {
   constructor() {
     super()
     this.state = {
       loggedIn: false,
-      username: null
+      username: null,
+      currentUsername: '',
+      currentView: 'WhatIsYourUsernameScreen'
     }
 
     this.getUser = this.getUser.bind(this)
     this.componentDidMount = this.componentDidMount.bind(this)
     this.updateUser = this.updateUser.bind(this)
+    this.onUsernameSubmitted = this.onUsernameSubmitted.bind(this)
+
   }
 
   componentDidMount() {
@@ -52,7 +58,49 @@ class App extends Component {
     })
   }
 
+  onUsernameSubmitted(username) {
+    fetch('http://localhost:3001/users', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ username }),
+    })
+      .then(response => {
+        this.setState({
+          currentUsername: username,
+          currentView: 'ChatScreen'
+        })
+      })
+      .catch(error => console.error('error', error))
+  }
+
+  testReturnComponent() {
+    if (this.state.currentView === "WhatIsYourUsernameScreen") {
+      return <UsernameForm onSubmit={this.onUsernameSubmitted} changeView={this.changeView} />
+    } if (this.state.currentView === "ChatScreen") {
+      return <ChatScreen onSubmit={this.createUser} currentUsername={this.state.currentUsername} />
+    }
+  }
+
   render() {
+
+    // if (this.state.currentScreen === 'WhatIsYourUsernameScreen') {
+    //   return <UsernameForm onSubmit={this.onUsernameSubmitted} />
+    // }
+    // if (this.state.currentScreen === 'ChatScreen') {
+    //   return <ChatScreen currentUsername={this.state.currentUsername} />
+    // }
+    let view = "";
+
+    if (this.state.currentView === "WhatIsYourUsernameScreen") {
+      view = <UsernameForm changeView={this.changeView} />
+    } if (this.state.currentView === "ChatScreen") {
+      view = <ChatScreen onSubmit={this.createUser} />
+    }
+
+
+
     return (
       <div className="App">
 
@@ -77,9 +125,27 @@ class App extends Component {
           render={() =>
             <Signup />}
         />
+
+        {/* <Route
+          path="/chat"
+          render={() =>
+            <UsernameForm />}
+        /> */}
+        <Route
+          path="/chat"
+          render={() => this.testReturnComponent()}
+        />
+
+        {/* <Route
+          path="/chat"
+          render={() =>
+            <ChatScreen currentUsername={this.state.currentUsername}/>}
+        /> */}
+
         <Route path="/jobcreation" component={JobCreation} />
         <Route path="/jobpost" component={JobPosting} />
         <Route path="/jobs" component={JobList} />
+
       </div>
     );
   }
