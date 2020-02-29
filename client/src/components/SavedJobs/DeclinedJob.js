@@ -22,8 +22,8 @@ const DeclinedJob = ({ savedjob, ...props }) => {
                         </Row>
                     </div>
                     <br />
-                    <h3 className="text-danger">This job has been declined</h3>
-                    <button onClick={() => props.handleDeleteTaskClick(savedjob._id)}>Delete Job</button>
+                    <h3 className="text-danger" style={{ "marginLeft": "18px" }}>This job has been declined</h3>
+                    <button style={{ "marginLeft": "18px" }} onClick={() => props.handleDeleteTaskClick(savedjob._id)}>Delete Job</button>
                 </div>
 
             </Row>

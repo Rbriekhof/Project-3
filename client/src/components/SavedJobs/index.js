@@ -22,7 +22,7 @@ const SavedJobs = props => {
             </div>
         ) : (
             <div className="card">
-                <div className="card-body player">
+                <div className="card-body player" style={{"textAlign":"left"}}>
                     <div className="article">
                         <h3>Created Jobs</h3>
                         {props.savedJobs.map(savedjob => {
@@ -41,26 +41,28 @@ const SavedJobs = props => {
                                                 <div className="col-md-11">
                                                     <div className="card-body">
                                                         <Row>
-                                                            <h3 className="jobTitle">{savedjob.jobTitle}</h3>
+                                                            <h4 className="jobTitle">{savedjob.jobTitle}</h4>
                                                         </Row>
                                                         <Row>
                                                             {"Posted by: " + savedjob.jobPoster}{" / "}{"Job price: $" + savedjob.jobPrice}
                                                         </Row>
                                                         <br />
                                                         <Row>
-                                                            {savedjob.jobDescription}
-                                                            {savedjob._id}
-
+                                                            {savedjob.jobDescription}                                         
                                                         </Row>
                                                     </div>
                                                     <br />
-                                                    <button className="deleteBook btn btn-primary" style={{ "marginLeft": "-15px" }} onClick={() => props.handleStatusUpdateClick(savedjob._id, 'accepted')}>
+
+                                                    
+                                                    <button className="btn btn-primary" style={{ "marginLeft": "18px" }} onClick={() => props.handleStatusUpdateClick(savedjob._id, 'accepted')}>
                                                         Accept Job
                                                     </button>
+                                                    
                                                 </div>
 
                                             </Row>
                                         </div>
+                                        <hr />
                                     </div>
                                 );
                         })}

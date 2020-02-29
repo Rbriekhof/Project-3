@@ -22,7 +22,7 @@ const ConfirmedJob = ({ savedjob, ...props }) => {
                         </Row>
                     </div>
                     <br />
-                    <button className="deleteBook btn btn-default" style={{ "marginLeft": "-15px" }} disabled="disabled">
+                    <button className="deleteBook btn btn-default" style={{ "marginLeft": "18px" }} disabled="disabled">
                         Job already started
                     </button>
                 </div>

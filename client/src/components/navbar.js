@@ -17,6 +17,7 @@ class Navbar extends Component {
         axios.post('/user/logout').then(response => {
             console.log(response.data)
             if (response.status === 200) {
+                localStorage.removeItem('LoggedInUser');
                 this.props.updateUser({
                     loggedIn: false,
                     username: null
