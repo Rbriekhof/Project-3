@@ -199,11 +199,11 @@ const API = {
 
   
   // Updates a job details in the database
-  updateTask(taskListDataNew) {
+  updateTask(id) {
     let JWToken = this.getJWT();
-    let id = taskListDataNew._id;
+    /* let id = this.id; */
 
-    return axios.put("/api/tasklist/" + id, taskListDataNew,
+    return axios.put("/api/tasklist/" + id,
       {
         headers: {
           Authorization: `Bearer ${JWToken}`

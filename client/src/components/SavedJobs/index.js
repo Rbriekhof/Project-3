@@ -125,10 +125,12 @@ import posts from '../LocalPosts/posts';
                                                             <br />
                                                             <Row>
                                                                 {savedjob.jobDescription}
+                                                                {savedjob._id}
+                                                            
                                                             </Row>
                                                             </div>
                                                             <br />
-                                                            <button className="deleteBook btn btn-primary" style={{"margin-left":"-15px"}} onClick={(e) => this.acceptClick(savedjob.jobId)}>
+                                                            <button className="deleteBook btn btn-primary" style={{"margin-left":"-15px"}} onClick={() => props.handleUpdateButton(savedjob._id)}>
                                                              Accept Job
                                                              </button>
                                                         </div>

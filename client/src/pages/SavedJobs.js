@@ -18,7 +18,7 @@ class SavedJobs extends Component {
 
     //function to update job details by id
     handleUpdateButton = id => {
-        console.log("");
+        console.log(id);
         API.updateTask(id)
             .then(res => this.componentDidMount())
             .catch(err => console.log(err))
