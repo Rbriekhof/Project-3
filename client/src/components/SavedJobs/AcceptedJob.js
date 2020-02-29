@@ -30,7 +30,7 @@ const AcceptedJob = ({ savedjob, ...props }) => {
                                 <button className="btn btn-success" style={{ "marginLeft": "18px" }} onClick={(e) => props.handleStatusUpdateClick(savedjob._id, 'confirmed')}>
                                     Confirm
                                 </button>
-                                
+                                {" "}
                                 <button className="btn btn-danger" onClick={(e) => props.handleStatusUpdateClick(savedjob._id, null)}>
                                     Decline
                                 </button>   
