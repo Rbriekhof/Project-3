@@ -150,7 +150,7 @@ const API = {
   deleteTask(id) {
     let JWToken = this.getJWT();
 
-    return axios.delete("/api/tasklist/" + id,
+    return axios.delete("/api/v1/tasklist/" + id,
       {
         headers: {
           Authorization: `Bearer ${JWToken}`
@@ -199,11 +199,12 @@ const API = {
 
   
   // Updates a job details in the database
-  updateTask(id) {
+  updateTask(id, updates) {
     let JWToken = this.getJWT();
     /* let id = this.id; */
 
-    return axios.put("/api/tasklist/" + id,
+    return axios.put("/api/v1/tasklist/" + id,
+      updates,
       {
         headers: {
           Authorization: `Bearer ${JWToken}`

@@ -11,9 +11,11 @@
   },
   "homepage": "TBD",
   "scripts": {
-    "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
+    "start": "if-env NODE_ENV=pro uction && npm run start:prod || npm run start:dev",
     "start:prod": "node server.js",
     "start:dev": "concurrently \"nodemon --ignore 'client/*'\" \"npm run client\"",
+    "server": "npm run kill && nodemon",
+    "kill-all": "npx kill-port 3001 && npx kill-port 3000",
     "client": "cd client && npm run start",
     "install": "cd client && npm install",
     "build": "cd client && npm run build",

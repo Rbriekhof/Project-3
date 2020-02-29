@@ -16,12 +16,16 @@ class SavedJobs extends Component {
             .catch(err => console.log("failed"))
     }
 
-    //function to update job details by id
-    handleUpdateButton = id => {
-        console.log(id);
-        API.updateTask(id)
-            .then(res => this.componentDidMount())
-            .catch(err => console.log(err))
+    handleStatusUpdateClick = (id, status) => {
+        API.updateTask(id, { jobStatus: status })
+        .then(res => this.componentDidMount())
+        .catch(err => console.log(err))
+    }
+
+    handleDeleteTaskClick = id => {
+        API.deleteTask(id)
+        .then(res => this.componentDidMount())
+        .catch(err => console.log(err))
     }
 
     render() {
@@ -30,7 +34,9 @@ class SavedJobs extends Component {
                 {console.log("before SavedResult")}
                 <Container>
                 {console.log("entered into container")}
-                    <SavedResult savedJobs={this.state.savedJobs} handleUpdateButton={this.handleUpdateButton} />
+                    <SavedResult savedJobs={this.state.savedJobs}
+                        handleStatusUpdateClick={this.handleStatusUpdateClick}
+                        handleDeleteTaskClick={this.handleDeleteTaskClick}/>
                 </Container>
             </Container>
         )

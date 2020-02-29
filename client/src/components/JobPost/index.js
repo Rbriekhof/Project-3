@@ -1,6 +1,6 @@
 import React from "react";
 
-const JobPost = ({ handleChange, handleJPostButton, postedDetails }) => {
+const JobPost = ({ handleChange, handleSubmit, postedDetails }) => {
     return (
             <form>
                 <div className="form-group">
@@ -46,7 +46,7 @@ const JobPost = ({ handleChange, handleJPostButton, postedDetails }) => {
                 </select>
                 </div>
                 */}
-                <button className="btn btn-primary" onClick={handleJPostButton}>
+                <button className="btn btn-primary" onClick={handleSubmit}>
                     Post Job
                 </button>
             </form>
