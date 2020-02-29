@@ -14,14 +14,10 @@
     "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
     "start:prod": "node server.js",
     "start:dev": "concurrently \"nodemon --ignore 'client/*'\" \"npm run client\"",
-    "server": "npm run kill && nodemon",
     "client": "cd client && npm run start",
-    "install": "cd client && npm run install",
+    "install": "cd client && npm install",
     "build": "cd client && npm run build",
-    "heroku-postbuild": "npm run build",
-    "lint": "eslint --quiet .",
-    "lint:fix": "eslint --fix .",
-    "test:coverage": "nyc report --reporter=text-lcov | coveralls"
+    "heroku-postbuild": "npm run build"
   },
   "nodemonConfig": {
     "events": {
@@ -83,6 +79,5 @@
     "sequelize": "^4.44.3",
     "serve-favicon": "^2.5.0",
     "spectre.css": "^0.5.8"
-  },
-  "proxy": "http://localhost:3001"
+  }
 }

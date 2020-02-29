@@ -39,7 +39,7 @@ class FormContainer extends Component {
     );
   }
 
-  
+
 
   handleTextArea(e) {
     console.log("Inside handleTextArea");
@@ -55,7 +55,7 @@ class FormContainer extends Component {
     );
   }
 
-  
+
 
   handleFormSubmit(e) {
     e.preventDefault();
@@ -64,7 +64,7 @@ class FormContainer extends Component {
     console.log(jobData);
     console.log("desc:");
     console.log();
-    alert("You are submitting : \n" + this.state.newJob.jobTitle +"\n"+ this.state.newJob.jobDescription);
+    alert("You are submitting : \n" + this.state.newJob.jobTitle + "\n" + this.state.newJob.jobDescription);
     {/*
     fetch("#", {
       method: "POST",
@@ -79,16 +79,16 @@ class FormContainer extends Component {
       });
     });
 */}
-API.postJob(jobData)
-.then(
-    
-    this.setState({ message: alert("Your job is posted") })
-)
-.catch(err => console.log(err))
+    API.postJob(jobData)
+      .then(
+
+        this.setState({ message: alert("Your job is posted") })
+      )
+      .catch(err => console.log(err))
   }
 
   handleClearForm(e) {
-      console.log("clear form");
+    console.log("clear form");
     e.preventDefault();
     this.setState({
       newJob: {
@@ -110,7 +110,7 @@ API.postJob(jobData)
           placeholder={"Enter Job Title"}
           handleChange={this.handleJobTitle}
         />{" "}
-        
+
         {/* About the job */}
         <TextArea
           title={"Describe your job"}
@@ -120,7 +120,7 @@ API.postJob(jobData)
           handleChange={this.handleTextArea}
           placeholder={"Describe your job with a few words"}
         />
-        
+
         <Button
           action={this.handleFormSubmit}
           type={"primary"}
