@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Redirect } from 'react-router-dom'
 import { Route, Link } from 'react-router-dom'
-import logo from '../logo.svg';
+import logo from '../Task Grab Logo.png';
 import '../App.css';
 import axios from 'axios'
 
@@ -17,6 +17,7 @@ class Navbar extends Component {
         axios.post('/user/logout').then(response => {
             console.log(response.data)
             if (response.status === 200) {
+                localStorage.removeItem('LoggedInUser');
                 this.props.updateUser({
                     loggedIn: false,
                     username: null
