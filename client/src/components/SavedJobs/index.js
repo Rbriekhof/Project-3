@@ -62,7 +62,7 @@ const SavedJobs = props => {
                                                             )
                                                             :
                                                             (
-                                                                <button className="btn btn-primary" style={{ "marginLeft": "18px" }} onClick={() => props.handleStatusUpdateClick(savedjob._id, 'accepted')}>
+                                                                <button className="btn btn-primary" style={{ "marginLeft": "18px" }} onClick={() => props.handleStatusUpdateClick(savedjob._id, 'accepted', localStorage.getItem('LoggedInUser'))}>
                                                                     Accept Job
                                                                 </button>
                                                             )

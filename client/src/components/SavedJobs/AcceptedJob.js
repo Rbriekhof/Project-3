@@ -20,20 +20,29 @@ const AcceptedJob = ({ savedjob, ...props }) => {
                         <Row>
                             {savedjob.jobDescription}
                         </Row>
+                        <Row>
+                            <i>This job has been accepted by {savedjob.jobAccepted}</i>
+                        </Row>
                     </div>
                     <br />
 
                     {
                         localStorage.getItem('LoggedInUser')===savedjob.jobPoster?
                         (
+                            
                             <div>
+                                
                                 <button className="btn btn-success" style={{ "marginLeft": "18px" }} onClick={(e) => props.handleStatusUpdateClick(savedjob._id, 'confirmed')}>
                                     Confirm
                                 </button>
-                                {" "}
-                                <button className="btn btn-danger" onClick={(e) => props.handleStatusUpdateClick(savedjob._id, null)}>
+                                
+                                <button className="btn btn-warning" style={{ "marginLeft": "18px" }} onClick={(e) => props.handleStatusUpdateClick(savedjob._id, null)}>
                                     Decline
-                                </button>   
+                                </button>  
+                                
+                                <button className="btn btn-danger" style={{ "marginLeft": "18px" }} onClick={() => props.handleDeleteTaskClick(savedjob._id)}>
+                                    Delete Job
+                                </button> 
                             </div>                                                            
                         )
                         :

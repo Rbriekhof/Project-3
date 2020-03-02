@@ -16,8 +16,9 @@ class SavedJobs extends Component {
             .catch(err => console.log("failed"))
     }
 
-    handleStatusUpdateClick = (id, status) => {
-        API.updateTask(id, { jobStatus: status })
+    handleStatusUpdateClick = (id, status, acceptedby) => {
+        console.log("acceptedby: "+acceptedby)
+        API.updateTask(id, { jobStatus: status, jobAccepted: acceptedby })
         .then(res => this.componentDidMount())
         .catch(err => console.log(err))
     }
