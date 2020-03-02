@@ -22,9 +22,30 @@ const ConfirmedJob = ({ savedjob, ...props }) => {
                         </Row>
                     </div>
                     <br />
-                    <button className="deleteBook btn btn-default" style={{ "marginLeft": "18px" }} disabled="disabled">
-                        Job already started
-                    </button>
+                    {
+                        localStorage.getItem('LoggedInUser')===savedjob.jobPoster?
+                        (
+                            <button className="deleteBook btn btn-default" style={{ "marginLeft": "18px" }} disabled="disabled">
+                                Job has been started by {savedjob.jobHandler}
+                            </button>
+                        )
+                        :
+                        (
+                            localStorage.getItem('LoggedInUser')===savedjob.jobAccepted?
+                            (
+                                <button className="deleteBook btn btn-default" style={{ "marginLeft": "18px" }} disabled="disabled">
+                                    You have started this job. Please communicate with job poster for progress update.
+                                </button>
+                            )
+                            :
+                            (
+                                <button className="deleteBook btn btn-default" style={{ "marginLeft": "18px" }} disabled="disabled">
+                                    Job already started
+                                </button>
+                            )
+                        )
+                    }
+                    
                 </div>
 
             </Row>

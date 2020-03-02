@@ -10,19 +10,21 @@ const AcceptedJob = ({ savedjob, ...props }) => {
                 </div>
                 <div className="col-md-11">
                     <div className="card-body">
-                        <Row>
-                            <h3 className="jobTitle">{savedjob.jobTitle}</h3>
-                        </Row>
-                        <Row>
-                            {"Posted by: " + savedjob.jobPoster}{" / "}{"Job price: $" + savedjob.jobPrice}
-                        </Row>
-                        <br />
-                        <Row>
-                            {savedjob.jobDescription}
-                        </Row>
-                        <Row>
-                            <i>This job has been accepted by {savedjob.jobAccepted}</i>
-                        </Row>
+              
+                            
+                            <div>
+                            <Row>
+                                <h3 className="jobTitle">{savedjob.jobTitle}</h3>
+                            </Row>
+                            <Row>
+                                {"Posted by: " + savedjob.jobPoster}{" / "}{"Job price: $" + savedjob.jobPrice}
+                            </Row>
+                            
+                            <Row>
+                                {savedjob.jobDescription}
+                            </Row>
+                            </div>
+                        
                     </div>
                     <br />
 
@@ -31,12 +33,15 @@ const AcceptedJob = ({ savedjob, ...props }) => {
                         (
                             
                             <div>
-                                
-                                <button className="btn btn-success" style={{ "marginLeft": "18px" }} onClick={(e) => props.handleStatusUpdateClick(savedjob._id, 'confirmed')}>
+                                <button className="deleteBook btn btn-info" style={{ "marginLeft": "18px"}} disabled="disabled">
+                                    {savedjob.jobAccepted + " has accepted this job"}
+                                </button>
+                               <br/><br/>
+                                <button className="btn btn-success" style={{ "marginLeft": "18px" }} onClick={(e) => props.handleStatusUpdateClick(savedjob._id, 'confirmed', savedjob.jobAccepted, savedjob.jobAccepted)}>
                                     Confirm
                                 </button>
                                 
-                                <button className="btn btn-warning" style={{ "marginLeft": "18px" }} onClick={(e) => props.handleStatusUpdateClick(savedjob._id, null)}>
+                                <button className="btn btn-warning" style={{ "marginLeft": "18px" }} onClick={(e) => props.handleStatusUpdateClick(savedjob._id, null, null, null)}>
                                     Decline
                                 </button>  
                                 
@@ -47,9 +52,18 @@ const AcceptedJob = ({ savedjob, ...props }) => {
                         )
                         :
                         (
-                            <button className="deleteBook btn btn-default" style={{ "marginLeft": "18px", "opacity": "100" }} disabled="disabled">
+                            localStorage.getItem('LoggedInUser')===savedjob.jobAccepted?
+                            (
+                            <button className="deleteBook btn btn-info" style={{ "marginLeft": "18px", "opacity": "100" }} disabled="disabled">
+                                You have accepted this job
+                            </button>
+                            )
+                            :
+                            (
+                                <button className="deleteBook btn btn-default" style={{ "marginLeft": "18px", "opacity": "100" }} disabled="disabled">
                                 Already accepted by someone
                             </button>
+                            )
                         )
                 
                     }
